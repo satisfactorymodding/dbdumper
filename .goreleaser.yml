@@ -24,13 +24,7 @@ changelog:
       - '^docs:'
       - '^test:'
 
-kos:
-  - repository: ghcr.io/satisfactorymodding/dbdumper
-    tags:
-      - "{{ .Tag }}"
-      - "v{{ .Major }}"
-      - "v{{ .Major }}.{{ .Minor }}"
-      - "latest"
-    bare: true
-    platforms:
-      - linux/amd64
+dockers:
+  - image_templates:
+      - "ghcr.io/satisfactorymodding/dbdumper:latest"
+      - "ghcr.io/satisfactorymodding/dbdumper:{{ .Tag }}"
