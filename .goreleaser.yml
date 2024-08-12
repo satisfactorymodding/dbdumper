@@ -1,3 +1,5 @@
+version: 2
+
 builds:
   - env:
       - CGO_ENABLED=0
@@ -7,10 +9,7 @@ builds:
       - amd64
 
 archives:
-  - replacements:
-      linux: Linux
-      amd64: x86_64
-    allow_different_binary_count: true
+  - allow_different_binary_count: true
 
 checksum:
   name_template: 'checksums.txt'
