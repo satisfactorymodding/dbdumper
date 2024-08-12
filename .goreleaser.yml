@@ -1,0 +1,37 @@
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+
+archives:
+  - replacements:
+      linux: Linux
+      amd64: x86_64
+    allow_different_binary_count: true
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+kos:
+  - repository: ghcr.io/satisfactorymodding/dbdumper
+    tags:
+      - "{{ .Tag }}"
+      - "v{{ .Major }}"
+      - "v{{ .Major }}.{{ .Minor }}"
+      - "latest"
+    bare: true
+    platforms:
+      - linux/amd64
