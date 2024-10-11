@@ -17,7 +17,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-var emailRegex = regexp.MustCompile(`'[a-z0-9._%+!$&*=^|~#'?{}/\-]+?@[a-z0-9\- ]+?\.[^@' ]+?'`)
+var emailRegex = regexp.MustCompile(`\t[a-z0-9._%+!$&*=^|~#'?{}/\-]+?@[a-z0-9\- ]+?\.[^@' ]+?\t`)
 
 func main() {
 	// read in flags
@@ -49,7 +49,6 @@ func main() {
 		"-U", user,
 		"-b",
 		"--quote-all-identifiers",
-		"--inserts",
 		"--exclude-table-data", "user_sessions",
 	)
 
@@ -65,7 +64,7 @@ func main() {
 
 	// replace all emails
 	outStr = emailRegex.ReplaceAllStringFunc(outStr, func(s string) string {
-		return "'" + uuid.New().String() + "@" + uuid.New().String() + ".com'"
+		return "\t" + uuid.New().String() + "@" + uuid.New().String() + ".com\t"
 	})
 
 	// save data
